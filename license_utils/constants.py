@@ -1,0 +1,3 @@
+LICENSE_ISSUER = "ISS:license_manager"
+AUDIENC_PREFIX = "AUD:"
+JWT_ALGORITHM = "RS256"

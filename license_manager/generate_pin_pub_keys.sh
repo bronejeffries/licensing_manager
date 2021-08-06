@@ -1,3 +1,4 @@
+#expects two parameters => location and client name
 echo ////////// Start generating private and public keys ////// $2
 
 cd $1

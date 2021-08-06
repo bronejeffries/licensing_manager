@@ -19,13 +19,14 @@ class Client(models.Model):
     address = models.CharField(max_length=150, null=False, blank=False)
     contact = models.CharField(max_length=150, null=False, blank=False)
     public_key = models.TextField()
+    private_key = models.TextField()
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
 
     class Meta:
         constraints = [models.UniqueConstraint(
-            fields=['public_key', 'name'], name="Client and public key constraint")]
+            fields=['public_key', 'private_key', 'name'], name="Client and public key constraint")]
 
     def __repr__(self):
         return f"{self.name}"
@@ -43,7 +44,7 @@ class License(models.Model):
                                               ("Concurrent", "Named"))
 
     license_key = models.TextField(
-        editable=False, default=generate_key, unique=True)
+        editable=False, unique=True)
     license_secret_key = models.UUIDField(
         editable=False, default=uuid.uuid4, unique=True)
     client = models.ForeignKey(
