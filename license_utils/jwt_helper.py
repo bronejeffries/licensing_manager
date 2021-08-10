@@ -1,5 +1,5 @@
 import jwt
-from .constants import LICENSE_ISSUER, AUDIENC_PREFIX, JWT_ALGORITHM
+from license_utils.constants import LICENSE_ISSUER, AUDIENC_PREFIX, JWT_ALGORITHM
 from datetime import datetime
 
 
@@ -17,3 +17,12 @@ class JWT_helper(object):
             "license": f"licence issued for {client.name}, must be kept confindential"
         }
         return jwt.encode(pay_load, client.private_key, algorithm=JWT_ALGORITHM)
+    
+    @classmethod
+    def create_software_initialization_token(cls,client_software_pay_load,private_key):
+        """
+            generate software initialization token
+        """
+        client_software_pay_load["iss"] = LICENSE_ISSUER
+        client_software_pay_load["iat"] = datetime.utcnow()
+        return jwt.encode(client_software_pay_load,private_key,algorithm=JWT_ALGORITHM)

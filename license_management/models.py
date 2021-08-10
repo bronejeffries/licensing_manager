@@ -4,6 +4,7 @@ import uuid
 from django.utils.translation import gettext_lazy as _
 import secrets
 from django.conf import settings
+from license_utils.jwt_helper import JWT_helper
 # Create your models here.
 
 
@@ -89,12 +90,10 @@ class License(models.Model):
             })
 
     def save(self, *args, **kwargs):
-
-        # clean mac addresses
-        # self.allowed_mac_addresses = ",".join(
-        #     [mac.strip() for mac in self.allowed_mac_addresses.split(",")]
-        # )
-        # end clean
+        
+        # generate license key
+        self.license_key = JWT_helper.create_license_for_client(self.client)
+        # end
 
         if self.license_type == "Named":
             self.max_access_limit = 1
