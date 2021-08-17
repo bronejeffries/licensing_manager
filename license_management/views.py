@@ -21,6 +21,7 @@ class LicenseViewSet(viewsets.ReadOnlyModelViewSet, mixins.UpdateModelMixin):
     serializer_class = LicenseSerializer
     # permission_classes = [permissions.IsAuthenticated]
     lookup_field = 'license_key'
+    lookup_value_regex = '[-\w.]+'
     lookup_url_kwarg = lookup_field
     extra_get_look_up_field = 'license_secret_key'
     extra_get_url_look_up_kwargs = 's_key'
