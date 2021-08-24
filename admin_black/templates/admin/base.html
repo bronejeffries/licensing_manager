@@ -24,7 +24,6 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" rel="stylesheet" />
 
-    <link href="https://lib.arvancloud.com/ar/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" rel="stylesheet" />
     <link href="{% static 'admin_black/assets/css/bootstrap-rtl.css'%}" rel="stylesheet" />
 
     <link href="{% static 'admin/css/responsive_rtl.css'%}" rel="stylesheet" />
@@ -91,7 +90,8 @@
     {% endif %}
 
     <!-- Core JS Files -->
-    <script src="{% static 'admin_black/assets/js/core/jquery.min.js'%}"></script>
+    <!-- <script src="{% static 'admin_black/assets/js/core/jquery.min.js'%}"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="{% static 'admin_black/assets/js/core/popper.min.js'%}"></script>
     <script src="{% static 'admin_black/assets/js/core/bootstrap.min.js'%}"></script>
     <script src="{% static 'admin_black/assets/js/plugins/perfect-scrollbar.jquery.min.js'%}"></script>
@@ -99,6 +99,7 @@
     <!-- Place this tag in your head or just before your close body tag. -->
 
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
     <!-- Chart JS -->
     <script src="{% static 'admin_black/assets/js/plugins/chartjs.min.js'%}"></script>
     <!--  Notifications Plugin    -->
@@ -109,6 +110,15 @@
     <script src="{% static 'admin_black/assets/demo/demo.js'%}"></script>
     <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
     <script src="{% static 'admin_black/assets/js/scripts.js'%}"></script>
+
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+
 
     <script>
         {% if messages %}
@@ -128,6 +138,17 @@
         $('textarea').addClass('form-control');
         ChangeSidBarBackground('{{ admin_black_setting.sidebar_background }}');
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('#result_table').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
+</script>
 
     {% block extrascript %}{% endblock %}
 </body>
